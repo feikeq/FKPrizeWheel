@@ -37,7 +37,7 @@ import './fk-prize-wheel.js';
 
 ## 组件使用：
 ```html
-<fk-prize-wheel 
+  <fk-prize-wheel 
     title="肥客大转盘抽奖fk-prize-wheel浏览器原生组件Web Components API"
     onchange="console.log('默认事件:',event.detail)"
     image="pan.jpg"
