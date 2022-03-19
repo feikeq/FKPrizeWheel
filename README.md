@@ -74,7 +74,7 @@ import './fk-prize-wheel.js';
     });
     // 抽奖
     function start() {
-      fkPrizewWeel.go(3); // 传参 index 第几个奖器
+      fkPrizewWeel.go(3); // 传参 index 第几个奖品
     }
     function run() {
       fkPrizewWeel.run(true); // 开始无限转动
