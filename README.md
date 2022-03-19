@@ -1,4 +1,6 @@
-# FKPrizeWheel
+# FKPrizeWheel - https://www.FK68.net/
+* Version - 1.0.3
+
 肥客大转盘抽奖fk-prize-wheel浏览器原生组件Web Components API
 ## 组件特性：
 + 原生组件Web Components API
@@ -26,47 +28,59 @@
 import './fk-prize-wheel.js';
 ```
 
-## 组件参数：
+## 组件配置：
 +  title              属性       标题
 +  image              属性       转盘背景图地址
 +  size               属性       转盘背景图比例(默认100%)
 +  onchange           事件       点击中间按扭区域的事件
 +  onPrizeEndOver     事件       动画结束后触发事件(需要 addEventListener 来监听)
-+  slot               默认插槽    用于放置奖品列表项元素
-+  slot[name=button]  按扭插槽    抽奖中心区域插槽
++  slot               默认插槽    奖盘旋转区域（主要用于放置奖品列表项元素)
++  slot[name=button]  按扭插槽    奖盘固定区域 (如抽奖按扭和转盘阴影蒙层)
+
+
+## 组件方法：
++  run(status)        方法       开始/停止 缓慢转动（status是布尔型）
++  go(index)          方法       转到哪个奖品(index为slot里的第一个奖品元素)
+
 
 ## 组件使用：
 ```html
-  <fk-prize-wheel 
-    title="肥客大转盘抽奖fk-prize-wheel浏览器原生组件Web Components API"
-    onchange="console.log('默认事件:',event.detail)"
-    image="pan.jpg"
-    size="110%"
-  >
+  <fk-prize-wheel title="肥客大转盘抽奖fk-prize-wheel浏览器原生组件Web Components API" onchange="console.log('默认事件:',event.detail)"
+    image="icon.png" size="110%">
     <div>奖品2</div>
     <div>奖品2</div>
     <div>奖品3</div>
     <div>奖品4</div>
     <div>奖品5</div>
     <div>奖品6</div>
-    // <p slot="button" onclick="start()">中间抽奖按钮</p>
+    <div>奖品8</div>
+    <div>奖品7</div>
+
     <div slot="button" onclick="start()">
-      <img style="width: 100%;"  src="./res/circular_shadow.png" />
-      <img style="position: absolute; top:50%;left:50%; transform: translate(-50%, -50%);" width="80" src="./res/go.png">
+      <img style="width: 100%;" alt="转盘阴影" src="circular_shadow.png" />
+      <button style="position: absolute; top:50%;left:50%; transform: translate(-50%, -50%);" width="80"
+        onclick="start()">中间抽奖按钮(请求后)</button>
     </div>
   </fk-prize-wheel>
-
+  <button onclick="run()" style="height:100px;" >开始无限转动(请求前)</button>
+  <button onclick="stop()" style="height:100px;" >停止无限转动</button>
   <script>
     // 肥客大转盘抽奖fk-prize-wheel浏览器原生组件Web Components API
     var fkPrizewWeel = document.querySelector('fk-prize-wheel');
     // 抽奖转盘动画结束事件
-    fkPrizewWeel.addEventListener('onPrizeEndOver',function(event){
+    fkPrizewWeel.addEventListener('onPrizeEndOver', function (event) {
       console.log("---- onPrizeEndOver ----");
       console.log(event.detail);
     });
     // 抽奖
-    function start(){
-      fkPrizewWeel.run(3); // 传参 index 第几个奖器
+    function start() {
+      fkPrizewWeel.go(3); // 传参 index 第几个奖器
+    }
+    function run() {
+      fkPrizewWeel.run(true); // 开始无限转动
+    }
+    function stop() {
+      fkPrizewWeel.run(false); // 停止无限转动
     }
   </script>
 ```
